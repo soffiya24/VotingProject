@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Internal CSS -->
+  <style>
+    .navbar {
+      background-color:#8c52ff;
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+      color: #ffffff;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .footer {
+      background-color:#8c52ff;
+      color: #ffffff;
+      text-align: center;
+      padding: 17px 0;
+    }
+    .btn{
+      background-color:#8c52ff;
+      color:#ffffff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Vote</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="voting.html">Voting-poll</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="logout">Logout</a>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- Contact Us Section -->
+<section class="container mt-5">
+  <h2>Contact Us</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"name="name" placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email"placeholder="Enter your email">
+    </div>
+    <!-- <div class="form-group">
+      <label for="message">Address</label>
+      <input type="text" class="form-control" id="address"name="address" placeholder="Enter your email">
+    </div> -->
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Message</label>
+      <textarea class="form-control" id="message" name="message" rows="5" placeholder="Message"></textarea>
+            
+    </div>
+    <button type="submit" class="btn ">Submit</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer class="footer ">
+  <div class="container">
+    <p>&copy; 2024 Voting Website. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

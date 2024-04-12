@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Internal CSS -->
+  <style>
+    
+    .navbar {
+      background-color:#8c52ff;
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+      color: #ffffff;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .footer {
+      background-color:#8c52ff;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .option-input {
+      margin-bottom: 10px;
+    }
+    .btn{
+      background-color:#8c52ff;
+      color:#ffffff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Vote</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="voting.html">Voting-poll</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'logout' %}>Logout</a>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Voting Poll Section -->
+{% for candidates_list in candidates_lists %}
+<section class="container mt-5">
+  <h2>Voting Poll</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        
+        <h2>{{ candidates_list.election.name }}</h2>
+        <p>{{ candidates_list.election.content }}</p>
+        
+        <div class="card-body">
+          
+          <h5 class="card-title">Candidates</h5>
+          <div id="optionsWrapper">
+            {% for candidate in candidates_list.candidates %}
+            <form action={% url 'send_vote' candidatename=candidate.name %} method="POST">
+              {% csrf_token %}
+            <div class="option-input">
+              <input type="text" class="form-control candidate" value="{{candidate.name}}" disabled>
+              <button class="btn  vote-btn" data-candidate="Candidate 1">Vote</button>
+            </div>
+            
+          </form>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 Voting Website. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript -->
+<script>
+  // Event listener for vote buttons
+  document.querySelectorAll('.vote-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+      // Get candidate name
+      var candidate = this.dataset.candidate;
+      // Update vote count
+      var voteCountElement = this.nextElementSibling;
+      var voteCount = parseInt(voteCountElement.textContent) + 1;
+      voteCountElement.textContent = voteCount;
+      // Save vote count in local storage (optional)
+      // Redirect to result page (optional)
+      // window.location.href = 'result.html';
+    });
+  });
+</script>
+
+</body>
+</html>
